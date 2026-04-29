@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ethan Pacifico — Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #888888;
+    --accent: #8b3a1f;
+    --line: rgba(26, 26, 26, 0.12);
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 28px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 22px;
+    letter-spacing: 0.01em;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: inherit;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links button {
+    background: none;
+    border: none;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    padding: 4px 0;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links button::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--ink);
+    transition: width 0.4s ease;
+  }
+
+  .nav-links button.active::after,
+  .nav-links button:hover::after {
+    width: 100%;
+  }
+
+  /* Pages */
+  .page {
+    display: none;
+    padding-top: 100px;
+    min-height: 100vh;
+    animation: fadeIn 0.6s ease;
+  }
+
+  .page.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Gallery hero */
+  .hero {
+    padding: 80px 48px 100px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(48px, 8vw, 112px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    max-width: 12ch;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* Masonry gallery */
+  .gallery-grid {
+    padding: 0 16px 120px;
+    columns: 3;
+    column-gap: 28px;
+  }
+
+  .photo {
+    break-inside: avoid;
+    margin-bottom: 28px;
+    background: #ffffff;
+    outline: 4px solid #000;
+    transition: outline-color 0.3s ease, transform 0.4s ease;
+    cursor: pointer;
+  }
+
+  .photo:hover {
+    outline-color: #FF6040;
+    transform: translateY(-2px);
+  }
+
+  .photo-inner {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/2;
+  }
+
+  .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.7s ease;
+  }
+
+  .photo:hover .photo-inner img {
+    transform: scale(1.04);
+  }
+
+
+
+  /* About page */
+  .about-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 48px 120px;
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .about-image {
+	width: 100%
+	height:100%
+	break-inside: avoid;
+    margin-bottom: 28px;
+    background: #ffffff;
+    padding: 10px;
+    outline: 4px solid #1a1a1a;
+    overflow: hidden;
+    background: #ffffff;
+  }
+
+  .about-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about-content h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 5vw, 72px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+  }
+
+  .about-content h2 em {
+    font-style: italic;
+  }
+
+  .about-content p {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--ink);
+    margin-bottom: 24px;
+    max-width: 52ch;
+  }
+
+  .about-content p.lead {
+    font-size: 19px;
+    color: var(--muted);
+  }
+
+  .contact-block {
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  .contact-label {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .contact-email {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 32px;
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+    display: inline-block;
+  }
+
+  .contact-email:hover {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Footer */
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 1100px) {
+    .gallery-grid { columns: 2; }
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 20px 24px; }
+    .nav-links { gap: 20px; }
+    .hero { padding: 60px 24px 60px; }
+    .gallery-grid {
+      columns: 1;
+      padding: 0 24px 80px;
+    }
+    .about-wrap {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      padding: 40px 24px 80px;
+    }
+    .contact-email { font-size: 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <button class="brand" onclick="showPage('gallery')">Ethan Pacifico</button>
+  <ul class="nav-links">
+    <li><button class="nav-btn active" data-page="gallery" onclick="showPage('gallery')">Gallery</button></li>
+    <li><button class="nav-btn" data-page="about" onclick="showPage('about')">About</button></li>
+  </ul>
+</nav>
+
+<!-- GALLERY PAGE -->
+<main id="gallery" class="page active">
+  <section class="hero">
+    <div class="hero-eyebrow">Selected Works · 2024 — 2026</div>
+    <h1>People, places, <em>passing through.</em></h1>
+  </section>
+
+  <section class="gallery-grid">
+    <div class="photo">
+      <div class="photo-inner"><img src="https://picsum.photos/seed/marsh01/1200/800" alt="" loading="lazy" /></div>
+    </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Ethan Pacifico</span>
+    <span>All images protected</span>
+  </footer>
+</main>
+
+<!-- ABOUT PAGE -->
+<main id="about" class="page">
+  <section class="about-wrap">
+    <div class="about-image">
+      <img src="images/gallery/profile_pic.jpg" alt="Ethan Pacifico portrait" />
+    </div>
+
+    <div class="about-content">
+      <h2>About.</h2>
+      <p class="lead">
+        I'm Ethan Pacifico, a photographer working in street, documentary, and environmental portraiture.
+      </p>
+      <p>
+        I'm interested in everyday life — the unguarded moments people have when they think no one is watching, and the way a person's surroundings tell you who they are. Most of my work happens on foot, in public, with a single camera.
+      </p>
+      <p>
+        Portraits I make tend to be on location rather than in a studio: at someone's workplace, in their neighbourhood, in the rooms they actually live in. The setting is part of the subject.
+      </p>
+
+      <div class="contact-block">
+        <div class="contact-label">Get in touch</div>
+        <a href="mailto:contact@pacificoethan.com" class="contact-email">contact@pacificoethan.com</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Ethan Pacifico</span>
+    <span>All images protected</span>
+  </footer>
+</main>
+
+<script>
+  function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    const activeBtn = document.querySelector(`.nav-btn[data-page="${pageId}"]`);
+    if (activeBtn) activeBtn.classList.add('active');
+
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+</script>
+
+</body>
+</html>
