@@ -4,10 +4,20 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Ethan Pacifico — Photography</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
+@font-face {
+  font-family: 'BarberChop';
+  src: url('fonts/BarberChop.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'BadAbb';
+  src: url('fonts/BADABB__.TTF') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
   :root {
     --bg: #ffffff;
     --ink: #1a1a1a;
@@ -29,7 +39,7 @@
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: 'Jost', sans-serif;
+    font-family: 'BarberChop', sans-serif;
     font-weight: 300;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -54,7 +64,7 @@
   }
 
   .brand {
-    font-family: 'Fraunces', serif;
+    font-family: 'BadAbb', serif;
     font-weight: 300;
     font-style: italic;
     font-size: 22px;
@@ -135,7 +145,7 @@
   }
 
   .hero h1 {
-    font-family: 'Fraunces', serif;
+    font-family: 'BadAbb', serif;
     font-weight: 300;
     font-size: clamp(48px, 8vw, 112px);
     line-height: 1;
@@ -157,6 +167,7 @@
   }
 
   .photo {
+	container-type: inline-size;
     background: #ffffff;
     outline: 4px solid #000;
     transition: outline-color 0.3s ease, transform 0.4s ease;
@@ -185,8 +196,27 @@
   .photo:hover .photo-inner img {
     transform: scale(1.04);
   }
+  
+  .photo-number {
+	position: absolute;
+	bottom: 12px;
+	right: 14px;
+	font-family: 'BadAbb', serif;
+	font-size: 3cqw;
+	color: #FF6040;
+	line-height: 1;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	pointer-events: none;
+	text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+	z-index: 2;
+	-webkit-text-stroke: 1.5px #000000;
+	text-stroke: 1.5px #000000;
+}
 
-
+.photo:hover .photo-number {
+  opacity: 1;
+}
 
   /* About page */
   .about-wrap {
@@ -219,7 +249,7 @@
   }
 
   .about-content h2 {
-    font-family: 'Fraunces', serif;
+    font-family: 'BadAbb', serif;
     font-weight: 300;
     font-size: clamp(40px, 5vw, 72px);
     line-height: 1.05;
@@ -259,7 +289,7 @@
   }
 
   .contact-email {
-    font-family: 'Fraunces', serif;
+    font-family: 'BadAbb', serif;
     font-weight: 300;
     font-style: italic;
     font-size: 32px;
@@ -463,6 +493,14 @@
 
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
+  
+  document.querySelectorAll('.photo').forEach((photo, index) => {
+  
+	const num = document.createElement('div');
+	num.classList.add('photo-number');
+	num.textContent = '#' + String(index + 1).padStart(2, '0');
+	photo.querySelector('.photo-inner').appendChild(num);
+});
 </script>
 
 </body>
